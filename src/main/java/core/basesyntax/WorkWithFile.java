@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class WorkWithFile {
+    public static final int OPERATION_INDEX = 0;
+    public static final int AMOUNT_INDEX = 1;
     public void getStatistic(String fromFileName, String toFileName) {
         String line;
         int supply = 0;
@@ -12,10 +14,10 @@ public class WorkWithFile {
         try (BufferedReader bReader = new BufferedReader( new FileReader(fromFileName))) {
             while ((line = bReader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data[0].equals("supply")) {
-                    supply += Integer.parseInt(data[1]);
-                } else if (data[0].equals("buy")) {
-                    buy += Integer.parseInt(data[1]);
+                if (data[OPERATION_INDEX].equals("supply")) {
+                    supply += Integer.parseInt(data[AMOUNT_INDEX]);
+                } else if (data[OPERATION_INDEX].equals("buy")) {
+                    buy += Integer.parseInt(data[AMOUNT_INDEX]);
                 }
             }
         } catch (Exception e) {
