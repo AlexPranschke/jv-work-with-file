@@ -15,11 +15,12 @@ public class WorkWithFile {
             throw new RuntimeException("Write error " + toFileName, e);
         }
     }
+
     public String processStatistics(String fromFileName) {
         String line;
         int supply = 0;
         int buy = 0;
-        try (BufferedReader bReader = new BufferedReader( new FileReader(fromFileName))) {
+        try (BufferedReader bReader = new BufferedReader(new FileReader(fromFileName))) {
             while ((line = bReader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data[OPERATION_INDEX].equals("supply")) {
@@ -33,6 +34,7 @@ public class WorkWithFile {
         }
         return prepareStatistics(supply, buy);
     }
+
     public String prepareStatistics(int supply, int buy) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("supply,").append(supply).append(System.lineSeparator());
