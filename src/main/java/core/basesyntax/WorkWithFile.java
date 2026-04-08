@@ -8,7 +8,7 @@ public class WorkWithFile {
     public static final int OPERATION_INDEX = 0;
     public static final int AMOUNT_INDEX = 1;
 
-    public void writeStatistics(String result, String toFileName) {
+    private void writeStatistics(String result, String toFileName) {
         try (FileWriter fWriter = new FileWriter(toFileName)) {
             fWriter.write(result);
         } catch (Exception e) {
@@ -44,7 +44,6 @@ public class WorkWithFile {
     }
 
     public void getStatistic(String fromFileName, String toFileName) {
-        processStatistics(fromFileName);
         writeStatistics(processStatistics(fromFileName), toFileName);
     }
 }
