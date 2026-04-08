@@ -7,7 +7,15 @@ import java.io.FileWriter;
 public class WorkWithFile {
     public static final int OPERATION_INDEX = 0;
     public static final int AMOUNT_INDEX = 1;
-    public void getStatistic(String fromFileName, String toFileName) {
+
+    public void writeStatistics(String result, String toFileName) {
+        try (FileWriter fWriter = new FileWriter(toFileName)) {
+            fWriter.write(result);
+        } catch (Exception e) {
+            throw new RuntimeException("Write error " + toFileName, e);
+        }
+    }
+    public String processStatistics(String fromFileName) {
         String line;
         int supply = 0;
         int buy = 0;
@@ -23,13 +31,18 @@ public class WorkWithFile {
         } catch (Exception e) {
             throw new RuntimeException("Can't read from file " + fromFileName, e);
         }
-        String result = "supply," + supply + System.lineSeparator()
-                + "buy," + buy + System.lineSeparator()
-                + "result," + (supply - buy);
-        try (FileWriter fWriter = new FileWriter(toFileName)) {
-            fWriter.write(result);
-        } catch (Exception e) {
-            throw new RuntimeException("Write error " + toFileName, e);
-        }
+        return prepareStatistics(supply, buy);
+    }
+    public String prepareStatistics(int supply, int buy) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("supply,").append(supply).append(System.lineSeparator());
+        stringBuilder.append("buy,").append(buy).append(System.lineSeparator());
+        stringBuilder.append("result,").append(supply - buy);
+        return stringBuilder.toString();
+    }
+
+    public void getStatistic(String fromFileName, String toFileName) {
+        processStatistics(fromFileName);
+        writeStatistics(processStatistics(fromFileName), toFileName);
     }
 }
