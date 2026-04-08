@@ -16,7 +16,7 @@ public class WorkWithFile {
         }
     }
 
-    public String processStatistics(String fromFileName) {
+    private String processStatistics(String fromFileName) {
         String line;
         int supply = 0;
         int buy = 0;
@@ -35,7 +35,7 @@ public class WorkWithFile {
         return prepareStatistics(supply, buy);
     }
 
-    public String prepareStatistics(int supply, int buy) {
+    private String prepareStatistics(int supply, int buy) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("supply,").append(supply).append(System.lineSeparator());
         stringBuilder.append("buy,").append(buy).append(System.lineSeparator());
